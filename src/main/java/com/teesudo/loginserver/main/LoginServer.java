@@ -4,6 +4,7 @@ import com.codahale.metrics.JmxReporter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.SharedMetricRegistries;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.io.Resources;
 import com.hazelcast.internal.metrics.MetricsRegistry;
 import com.teesudo.webservice.annotation.VertxWorker;
 import com.teesudo.webservice.annotation.WebRouter;
@@ -31,7 +32,8 @@ public class LoginServer {
     private final static Logger LOGGER = LoggerFactory.getLogger(LoginServer.class);
 
     public static void main(String[] args) throws InterruptedException {
-        Config typeSafeConfig = new AppConfig(args[0]).getTypeSafeConfig();
+        // etc. config/login-server-shared.conf
+        Config typeSafeConfig = new AppConfig(Resources.getResource(args[0]).getPath()).getTypeSafeConfig();
 
         Vertx vertx = Vertx.vertx(
 //                new VertxOptions()
