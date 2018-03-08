@@ -52,10 +52,10 @@ public class LoginServer {
 
         VertxServerBootstrapper<LoginServer, LoginServerContext> serverHelper =
                 new VertxServerBootstrapper<>(LoginServer.class, LoginServerContext.class, vertx, typeSafeConfig);
-        serverHelper.startHttpServer(loginServerContext);
+        int port = serverHelper.startHttpServer(loginServerContext);
         serverHelper.deployWorkers(loginServerContext);
 
-        LOGGER.info("Login Server Service is UP.");
+        LOGGER.info("Login Server Service is UP at port: {}", port);
 
         TimeUnit.DAYS.sleep(365);
 
